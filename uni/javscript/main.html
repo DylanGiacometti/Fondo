@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #contenitore{
+            background-color: yellow;
+            padding: 4em;
+        }
+        #footer{
+            background-color: green;
+            padding: 2em;
+        }
+        p{
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        .two-col{
+            column-count: 2;
+        }
+        .rigth-col{
+            background-color: red;
+            padding: 1em;
+        }
+        .left-col{
+            background-color: blue;
+            padding: 1em;
+        }
+        .separator{
+            text-align: center;
+            padding: 1em;
+            background-color:aqua ;
+            margin-top: 1em;
+            margin-bottom: 1em;
+        }
+        .info-text{
+            width: auto;
+        }
+        .info-text-row{
+            border: 1px solid black;
+        }
+        .info-text-row p{
+            display: inline-block;
+            margin-right: 0.5em;
+        }
+        .info-photo{
+            background-color: white;
+            width: 250px;
+            height: 250px;
+        }
+        .info {
+            display: flex; /* Questo allinea gli elementi orizzontalmente */
+            margin-bottom: 1em;
+        }
+        .info-text {
+            flex: 0.7; /* Questo permette all'elemento di occupare lo spazio necessario */
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-right: auto;
+        }
+        .info-photo {
+            flex: 0 0 250px; /* Fissa la larghezza del div a 250px */
+            height: 250px;
+            background-color: white;
+            margin-inline: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="contenitore">
+        <h1>Titolo</h1>
+        <h2>sotto titolo</h2>
+        <div class="info two-col">
+            <div class="info-text">
+                <div class="info-text-row">
+                    <p>Name:</p>
+                    <p>Dexter</p>
+                </div>
+                <div class="info-text-row">
+                    <p>Id:</p>
+                    <p>758</p>
+                </div>
+                <div class="info-text-row">
+                    <p>Rhole:</p>
+                    <p>idkwtm</p>
+                </div>
+                <div class="info-text-row">
+                    <p>Class:</p>
+                    <p>Nevermind</p>
+                </div>
+            </div>
+            <div class="info-photo">
+
+            </div>
+        </div>
+        <div class="two-col">
+            <div class="rigth-col">
+                <p>Destra</p>
+            </div>
+            <div class="left-col">
+                <p>Sinistra</p>
+            </div>
+        </div>
+        <div class="separator">
+            <p>Singolo</p>
+        </div>
+        <div class="two-col">
+            <div class="rigth-col">
+                <p>destra</p>
+            </div>
+            <div class="left-col">
+                <p>sinistra</p>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <p>sotto</p>
+    </div>
+</body>
+</html>

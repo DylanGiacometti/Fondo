@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        textarea {
+            width: 500px;
+            height: 100px;
+        }
+
+        button {
+            margin-bottom: 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Sentences creator</h1>
+    <h2>Testo:</h2>
+    <textarea id="testo">
+Nel mezzo del cammin di nostra vita
+mi ritrovai per una selva oscura
+ché la diritta via era smarrita.</textarea>
+    <br>
+    <h2>Opzioni:</h2>
+    <label>1 - </label><input id="opz1"><br>
+    <label>2 - </label><input id="opz2"><br>
+    <label>3 - </label><input id="opz3"><br>
+    <label>4 - </label><input id="opz4"><br>
+    <label>5 - </label><input id="opz5"><br>
+    <br>
+    <button onclick="genera()">Genera</button>
+    <button onclick="pulisci()">Pulisci</button>
+    <br>
+    <textarea id="output"></textarea>
+</body>
+<script>
+    function genera() {
+        var testo = document.getElementById("testo").value;
+        var frasi = testo.split("\n");  // Divide il testo in base ai ritorni a capo (\n)
+
+        // Aggiungi "\n" a ogni frase e stampala
+        var output = "";
+        frasi.forEach(function (frase) {
+            output += `printf("` + frase + `\\n");\n`;  // Aggiunge "\n" come stringa alla fine e la stampa
+        });
+
+        document.getElementById("output").value = output;
+
+        // Recupera i valori degli input
+        var opz1 = document.getElementById("opz1").value;
+        var opz2 = document.getElementById("opz2").value;
+        var opz3 = document.getElementById("opz3").value;
+        var opz4 = document.getElementById("opz4").value;
+        var opz5 = document.getElementById("opz5").value;
+
+        // Crea un array delle opzioni che non sono vuote
+        var opzioni = [];
+
+        if (opz1.trim() !== "") opzioni.push(opz1);
+        if (opz2.trim() !== "") opzioni.push(opz2);
+        if (opz3.trim() !== "") opzioni.push(opz3);
+        if (opz4.trim() !== "") opzioni.push(opz4);
+        if (opz5.trim() !== "") opzioni.push(opz5);
+
+        // Crea la stringa di output formattata
+        for (var i = 0; i < opzioni.length; i++) {
+            output += `printf("${i + 1} - ${opzioni[i]}\\n");\n`;
+        }
+
+        // Stampa l'output nella textarea
+        document.getElementById("output").value = output;
+    }
+
+    function pulisci() {
+        // Pulisce gli input
+        document.getElementById("opz1").value = "";
+        document.getElementById("opz2").value = "";
+        document.getElementById("opz3").value = "";
+        document.getElementById("opz4").value = "";
+        document.getElementById("opz5").value = "";
+
+        // Pulisce la textarea di testo
+        document.getElementById("testo").value = "";
+    }
+
+
+</script>
+
+</html>

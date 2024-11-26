@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #container {
+            background-color: red;
+            border: 1px solid black;
+            width: 50%;
+            text-align: center;
+            margin-top: 25vh;
+            margin-bottom: 25vh;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="container">
+        <div id="login">
+            <h1>LOGIN</h1>
+        </div>
+        <div id="signin" style="display: none;">
+            <h1>SIGNIN</h1>
+        </div>
+    </div>
+    <button onclick="azione()">Cambia</button>
+</body>
+<script>
+    let login = document.getElementById("login");
+    let signin = document.getElementById("signin");
+    function azione(){
+        if(signin.style.diplay == "none"){
+            login.style.display = "none";
+            signin.style.diplay = "unset";
+            console.log("ciaobroooooo ho nascosto login");
+        } else {
+            
+        }
+    }
+</script>
+</html>

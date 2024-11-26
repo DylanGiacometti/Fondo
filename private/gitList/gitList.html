@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #container {
+            text-align: center;
+            padding: 2em 0;
+            width: 80%;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 1em;
+        }
+
+        h1 em {
+            font-style: normal;
+            color: #5cb85c;
+        }
+
+        #select-container {
+            margin-bottom: 2em;
+        }
+
+        select {
+            font-size: 1.1em;
+            padding: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 250px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        select:hover {
+            border-color: #5cb85c;
+        }
+
+        #table-container {
+            margin-top: 2em;
+            width: 100%;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        th,
+        td {
+            padding: 1em;
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #5cb85c;
+            color: #fff;
+            text-align: right;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e6f7e6;
+            cursor: pointer;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #ddd;
+            margin: 2em 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>Git command-<em>er</em></h1>
+
+        <!-- Select dropdown for category selection -->
+        <div id="select-container">
+            <select onchange="currentSelect(this.value)">
+                <option value="" disabled selected>Select category</option>
+                <option value="configuration_and_information">Configuration and Information</option>
+                <option value="file_management">File Management</option>
+                <option value="commit_and_history">Commit and History</option>
+                <option value="branches_and_merge">Branches and Merge</option>
+                <option value="remote_management">Remote Management</option>
+                <option value="undo_changes">Undo Changes</option>
+                <option value="tags">Tags</option>
+                <option value="submodule">Submodule</option>
+                <option value="debug_tools">Debug Tools</option>
+                <option value="utilities">Utilities</option>
+            </select>
+        </div>
+
+        <!-- This is where the table will be inserted dynamically -->
+        <div id="table-container">
+            <!-- Table content will be inserted here based on selection -->
+        </div>
+    </div>
+</body>
+<script>
+
+    // Function to handle the change in selected category
+    function currentSelect(selectedValue) {
+        // Pass the selected category to the function that handles data filtering
+        getCategory(selectedValue);
+    }
+
+    // Function to filter data based on the selected category
+    function getCategory(category) {
+        let array = []; //array to store filtered data
+
+        // Loop through the data and find matching categories
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].category == category) {
+                // Push relevant name and description into the array
+                array.push({
+                    name: data[i].name,
+                    desc: data[i].desc
+                });
+            }
+        }
+        // Call the function to display the table with the filtered data
+        stampTable(array);
+    }
+
+    // Function to create and display a table with the filtered data
+    function stampTable(array) {
+        // Check if a table already exists and remove it to avoid duplication
+        const existingTable = document.getElementById("table");
+        if (existingTable) {
+            existingTable.remove();
+        }
+
+        // Create a new table element
+        const table = document.createElement("table");
+        table.id = "table"; // Set an id for the table (for styling and referencing)
+
+
+        // Loop through the filtered array and create rows and cells
+        for (let i = 0; i < array.length; i++) {
+            const row = document.createElement("tr"); //create a new row
+            for (let j = 0; j < 2; j++) {
+                let cell;
+                // If it's the first column, create a table header cell
+                if (j == 0) {
+                    cell = document.createElement("th");
+                    cell.textContent = array[i].name;
+                // Otherwise, create a table data cell for the description
+                } else if (j == 1) {
+                    cell = document.createElement("td");
+                    cell.textContent = array[i].desc;
+                }
+                row.appendChild(cell); // Add the cell to the row
+            }
+            table.appendChild(row); // Add the row to the table
+        }
+
+        // Append the table to the body (or to any container element)
+        document.body.appendChild(table);
+    }
+
+    window.data = [
+        { "name": "git init", "desc": "Inizializza un nuovo repository Git nella directory corrente.", "category": "configuration_and_information" },
+        { "name": "git clone <url>", "desc": "Clona un repository remoto nella macchina locale.", "category": "configuration_and_information" },
+        { "name": "git config --global user.name \"Nome\"", "desc": "Configura il nome utente globale per Git.", "category": "configuration_and_information" },
+        { "name": "git config --global user.email \"email@example.com\"", "desc": "Configura l'email globale per Git.", "category": "configuration_and_information" },
+        { "name": "git config --list", "desc": "Visualizza la configurazione corrente di Git.", "category": "configuration_and_information" },
+        { "name": "git status", "desc": "Mostra lo stato del repository (file modificati, non tracciati, pronti per il commit, ecc.).", "category": "configuration_and_information" },
+        { "name": "git add <file>", "desc": "Aggiunge un file all'indice (staging area).", "category": "file_management" },
+        { "name": "git add .", "desc": "Aggiunge tutti i file (modificati e nuovi) all'indice.", "category": "file_management" },
+        { "name": "git rm <file>", "desc": "Rimuove un file tracciato dal repository e dal disco.", "category": "file_management" },
+        { "name": "git mv <nome_vecchio> <nome_nuovo>", "desc": "Rinomina o sposta un file tracciato.", "category": "file_management" },
+        { "name": "git commit -m \"messaggio\"", "desc": "Esegue un commit con un messaggio descrittivo.", "category": "commit_and_history" },
+        { "name": "git commit --amend", "desc": "Modifica l'ultimo commit (aggiungendo file o cambiando il messaggio).", "category": "commit_and_history" },
+        { "name": "git log", "desc": "Mostra la cronologia dei commit.", "category": "commit_and_history" },
+        { "name": "git log --oneline", "desc": "Mostra una cronologia compatta, con un commit per riga.", "category": "commit_and_history" },
+        { "name": "git diff", "desc": "Mostra le differenze tra i file modificati e quelli tracciati.", "category": "commit_and_history" },
+        { "name": "git diff <file>", "desc": "Mostra le differenze per un file specifico.", "category": "commit_and_history" },
+        { "name": "git branch", "desc": "Mostra tutti i branch locali.", "category": "branches_and_merge" },
+        { "name": "git branch <nome>", "desc": "Crea un nuovo branch.", "category": "branches_and_merge" },
+        { "name": "git checkout <branch>", "desc": "Passa a un altro branch.", "category": "branches_and_merge" },
+        { "name": "git switch <branch>", "desc": "Alternativa moderna a git checkout.", "category": "branches_and_merge" },
+        { "name": "git merge <branch>", "desc": "Unisce un branch specifico con il branch corrente.", "category": "branches_and_merge" },
+        { "name": "git branch -d <branch>", "desc": "Elimina un branch locale.", "category": "branches_and_merge" },
+        { "name": "git remote", "desc": "Mostra gli URL remoti configurati.", "category": "remote_management" },
+        { "name": "git remote add origin <url>", "desc": "Collega il repository locale a un repository remoto.", "category": "remote_management" },
+        { "name": "git push", "desc": "Invia i commit locali al repository remoto.", "category": "remote_management" },
+        { "name": "git push -u origin <branch>", "desc": "Invia un branch locale e imposta il tracciamento remoto.", "category": "remote_management" },
+        { "name": "git pull", "desc": "Recupera i cambiamenti dal repository remoto e li unisce al branch corrente.", "category": "remote_management" },
+        { "name": "git fetch", "desc": "Recupera i cambiamenti dal repository remoto senza unirli.", "category": "remote_management" },
+        { "name": "git restore <file>", "desc": "Ripristina un file modificato al suo stato tracciato.", "category": "undo_changes" },
+        { "name": "git checkout -- <file>", "desc": "Vecchio name per ripristinare un file.", "category": "undo_changes" },
+        { "name": "git reset HEAD <file>", "desc": "Rimuove un file dall'indice (senza cancellarlo).", "category": "undo_changes" },
+        { "name": "git revert <commit>", "desc": "Annulla un commit specifico creando un nuovo commit.", "category": "undo_changes" },
+        { "name": "git reset --soft <commit>", "desc": "Sposta HEAD indietro mantenendo le modifiche nell'indice.", "category": "undo_changes" },
+        { "name": "git reset --hard <commit>", "desc": "Sposta HEAD indietro eliminando tutte le modifiche.", "category": "undo_changes" },
+        { "name": "git tag", "desc": "Mostra tutti i tag.", "category": "tags" },
+        { "name": "git tag <nome>", "desc": "Crea un nuovo tag.", "category": "tags" },
+        { "name": "git tag -a <nome> -m \"messaggio\"", "desc": "Crea un tag annotato.", "category": "tags" },
+        { "name": "git push origin <tag>", "desc": "Invia un tag al repository remoto.", "category": "tags" },
+        { "name": "git submodule add <url>", "desc": "Aggiunge un submodule al repository.", "category": "submodule" },
+        { "name": "git submodule update --init --recursive", "desc": "Inizializza e aggiorna i submodule.", "category": "submodule" },
+        { "name": "git submodule deinit <path>", "desc": "Rimuove un submodule dal repository.", "category": "submodule" },
+        { "name": "git stash", "desc": "Salva temporaneamente le modifiche non committate.", "category": "debug_tools" },
+        { "name": "git stash pop", "desc": "Recupera le modifiche salvate con git stash.", "category": "debug_tools" },
+        { "name": "git blame <file>", "desc": "Mostra la cronologia delle modifiche per ogni riga di un file.", "category": "debug_tools" },
+        { "name": "git bisect", "desc": "Identifica il commit che ha introdotto un bug.", "category": "debug_tools" },
+        { "name": "git show <commit>", "desc": "Mostra i dettagli di un commit specifico.", "category": "utilities" },
+        { "name": "git reflog", "desc": "Mostra la cronologia delle modifiche a HEAD.", "category": "utilities" },
+        { "name": "git clean -f", "desc": "Rimuove file non tracciati dalla directory di lavoro.", "category": "utilities" }
+    ];
+
+</script>
+
+</html>
