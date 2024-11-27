@@ -123,7 +123,6 @@ char *vigenereCipher(const char *message) {
     // Remove non-alphabetic characters from the key
     char key[24];
     formatText(keyInput, key);
-
     // Check if the key is valid
     if (strlen(key) == 0) {
         printf("Invalid key, it must contain at least one alphabetic character.\n");
